@@ -41,6 +41,7 @@ private:
 
 public:
 	
+	//Default constructor must have size of array declared
 	CircularArray(int size)
 	{
 		arr.resize(size);
@@ -63,6 +64,8 @@ public:
 		return arr.size();
 	}
 
+	//Returns the number of elements contained in the array
+	//Ignores elements that are empty initializations of stored element
 	int numElements()
 	{
 		T empty{};
@@ -75,6 +78,8 @@ public:
 		return num;
 	}
 
+	//Returns if the circular array is empty
+	//default elements that exist upon vector initialization are ignored
 	bool isEmpty()
 	{
 		if (numElements() == 0)
@@ -83,13 +88,17 @@ public:
 			return false;
 	}
 
+	//Adds element to array
+	//Elements are added at next available space
+	//If array is full, element will override next available element
 	void add(T element)
 	{
 		getNewStart();
 		*arrEnd = element;
 		incrementEnd();
 	}
-
+	
+	//Removes oldest element from the array
 	void remove()
 	{
 		if (isEmpty())
@@ -103,14 +112,20 @@ public:
 
 	}
 
-	typename std::vector<T>::iterator begin()
+	//Returns iterator pointing to oldest element in array
+	typename std::vector<T>::iterator front()
 	{
 		return start;
 	}
 
+	typename std::vector<T>::iterator begin()
+	{
+		return arr.begin();
+	}
+
 	typename std::vector<T>::iterator end()
 	{
-		return arrEnd;
+		return arr.end();
 	}
 };
 
