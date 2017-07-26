@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <iterator>
 
 template<class T>
 class CircularArray
@@ -8,14 +9,14 @@ class CircularArray
 private:
 	typename std::vector<T> arr; //array where elements are stored
 	typename std::vector<T>::iterator start; //Start of the circular array (oldest element)
-	typename std::vector<T>::iterator end; //End of circular array (where new elements will be placed)
+	typename std::vector<T>::iterator arrEnd; //End of circular array (where new elements will be placed)
 
 	//Determines if the start iterator needs to be incremented
 	void getNewStart()
 	{
-		if (start == end)
+		if (start == arrEnd)
 		{
-			T empty;
+			T empty{};
 			if (*start != empty)
 				incrementStart();
 		}
@@ -33,9 +34,9 @@ private:
 	// If it reaches end of the array, it loops back to beginning of the array
 	void incrementEnd()
 	{
-		end++;
-		if (end == arr.end())
-			end = arr.begin();
+		arrEnd++;
+		if (arrEnd == arr.end())
+			arrEnd = arr.begin();
 	}
 
 public:
@@ -44,7 +45,7 @@ public:
 	{
 		arr.resize(size);
 		start = arr.begin();
-		end = arr.begin();
+		arrEnd = arr.begin();
 	}
 
 	~CircularArray()
@@ -64,7 +65,7 @@ public:
 
 	int numElements()
 	{
-		T empty;
+		T empty{};
 		int num = 0;
 		for (unsigned i = 0; i < arr.size(); i++)
 		{
@@ -74,16 +75,26 @@ public:
 		return num;
 	}
 
+	bool isEmpty()
+	{
+		if (numElements() == 0)
+			return true;
+		else
+			return false;
+	}
+
 	void add(T element)
 	{
 		getNewStart();
-		*end = element;
+		*arrEnd = element;
 		incrementEnd();
 	}
 
 	void remove()
 	{
-		T empty;
+		if (isEmpty())
+			return;
+		T empty{};
 		if (*start != empty)
 		{
 			*start = empty;
@@ -92,5 +103,14 @@ public:
 
 	}
 
+	typename std::vector<T>::iterator begin()
+	{
+		return start;
+	}
+
+	typename std::vector<T>::iterator end()
+	{
+		return arrEnd;
+	}
 };
 
