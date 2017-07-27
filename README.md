@@ -29,12 +29,12 @@ The program also comes with some tests that can be run using pytest.
 `pytest ./imageCompare.py` will run all tests included with the script.
 I used the Pillow (PIL) and numpy libraries in my script. Pillow was used to load images, get data such as image size, convert their mode to RGB, and crop the image to create tiles. Numpy was used to easily compute the mean of the RGB values of each tile.
 
-##Bonus Task 1
+## Bonus Task 1
 While I didn't get a chance to attempt to code my solution to this problem, I was able to give it some thought. My first thought was to create a project class that would act like a doubly linked list. Then as dependencies are listed, the projects would link to the next project (project dependent on them) and the previous project (project they are depent on if applicable). Properly linking these projects would allow for traversal of the linked list to publish the build order. 
 Another idea I had was to list the projects in a vector. As dependencies are listed, incrementally move the project up the vector by swapping it with the previous index until it is at a lower index than the dependent project. Continue doing this until there are no dependencies. The problem I had with this solution is that it could be difficult to tell if there was a conflicting dependency that would prevent any kind of build order.
 
-##Bonus Task 2
+## Bonus Task 2
 I haven't looked into bonus task 2 to provide my thoughts on it.
 
-##Bonus Task 3
+## Bonus Task 3
 I downloaded QT, as well as Cmake version 3.4.3. I used the older version of Cmake since 3.4 was the last version the instructions listed as having been tested and confirmed to work. Unfortunately, I kept running into errors when I tried to use Cmake to build the project. The error was along the lines of Cmake could not find the C compiler identification. Although this seemed like a common error online, I could not find a solution that fit my environment. The most common solution was that Visual Studio didn't install the C++ build tools or that Visual Studio was installed after Cmake. Neither of these problems applied to me, seeing as I use VS to primarily create C++ programs and it was installed long before Cmake. Perhaps with some more searching online I could find a solution that works for my environment.  
